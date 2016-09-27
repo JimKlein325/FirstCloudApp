@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Texter.Models;
 
 namespace Texter.Controllers
@@ -26,6 +27,17 @@ namespace Texter.Controllers
         {
             newMessage.Send();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult SmsResponseGet(Response response)
+        {
+            return View(response);
+        }
+
+        [HttpPost]
+        public IActionResult SmsResponse(Response response)
+        {
+            return RedirectToAction("SmsResponseGet", response);
         }
     }
 }
